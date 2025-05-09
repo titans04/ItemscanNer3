@@ -417,9 +417,9 @@ def export_items_pdf():
         # Alternating row colors for better readability
         ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.lightgrey])
     ]))
-    
+     
     # Add a footer with page numbers
-    def add_page_number(canvas, doc): 
+    def add_page_number(canvas, doc):   
         canvas.saveState() 
         canvas.setFont('Helvetica', 9) 
         page_num = canvas.getPageNumber()
