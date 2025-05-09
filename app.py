@@ -391,8 +391,8 @@ def export_items_pdf():
     # Apply professional black and white styling
     table.setStyle(TableStyle([
         # Header row styling
-        ('BACKGROUND', (0, 0), (-1, 0), colors.black),
-        ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.white),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
         ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
         ('FONTSIZE', (0, 0), (-1, 0), 10),
