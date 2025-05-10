@@ -12,7 +12,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_CENTER
 from datetime import datetime
 from reportlab.lib.enums import TA_LEFT
-
+from sqlalchemy import desc
 
 
 app = Flask(__name__) 
@@ -30,7 +30,11 @@ def home():
     This route now simply displays a message.  It could be expanded
     to show a welcome page or instructions for the admin.
     """
-    return render_template("home.html")  # Create a simple home.html
+    with app.app_context():  # Push the application context
+            # Fetch recently added items, ordered by item_id in descending order and limited to 5
+            recent_scans = Item.query.order_by(desc(Item.item_id)).limit(3).all()
+
+    return render_template("home.html",recent_scans=recent_scans)  # Create a simple home.html
 
 
 
@@ -91,7 +95,7 @@ def admin_dashboard():
             inventory_data[item.item_name]["damaged"] += 1
         elif status_value == "NOT_WORKING":
             inventory_data[item.item_name]["not_working"] += 1
-        elif status_value == "NOT_SETUP":
+        elif status_value == "NOT_SETUP": 
             inventory_data[item.item_name]["not_setup"] += 1
     
     # Convert sets to sorted comma-separated strings for the template
@@ -104,15 +108,16 @@ def admin_dashboard():
     total_working = sum(1 for item in items if item.status.value.upper() in ["WORKING", "WORKING"])
     total_damaged = sum(1 for item in items if item.status.value.upper() == "DAMAGED")
     total_not_working = sum(1 for item in items if item.status.value.upper() == "NOT_WORKING")
-    total_not_setup = sum(1 for item in items if item.status.value.upper() == "NOT_SETUP")
+    total_not_setup = sum(1 for item in items if item.status.value.upper() == "NOT_SETUP") 
     
     # Get unique locations for the location filter
-    locations = sorted(set(item.location for item in items))
+    locations = sorted(set(item.location for item in items)) 
     
     # Get unique brands for the brand filter
     brands = sorted(set(item.brand for item in items if item.brand))
+    recently_added_items = Item.query.order_by(Item.item_id.desc()).limit(5).all()
     
-    return render_template(
+    return render_template( 
         "admin_dashboard.html", 
         items=items,
         inventory_data=inventory_data,
@@ -122,13 +127,14 @@ def admin_dashboard():
         total_not_working=total_not_working,
         total_not_setup=total_not_setup,
         locations=locations,
-        brands=brands
+        brands=brands,
+        recently_added_items=recently_added_items
     )
 
 # the logout for the button
 @app.route('/admin/logout')
 def admin_logout():
-    session.pop('admin', None)
+    session.pop('admin', None) 
     flash('Logged out successfully.', 'info')
     return redirect(url_for('home')) # Redirect to the home page
 
@@ -226,23 +232,23 @@ def edit_item(item_id):
         item_to_edit.color = color if color else None
         
         # Get and validate new status
-        new_status = request.form["status"].strip()
+        new_status = request.form["status"].strip() 
         
-        # Validate the status.
-        valid_statuses = [status.value for status in Item]
+        # Validate the status.  
+        valid_statuses = [status.value for status in ItemStatus]
         if new_status not in valid_statuses:
             flash(f"Invalid item status. Please select one of: {', '.join(valid_statuses)}", "danger")
             return render_template("edit_item.html", item=item_to_edit, valid_statuses=valid_statuses)
         
         # Convert status string to enum and update
-        item_to_edit.status = Item(new_status)
+        item_to_edit.status = ItemStatus(new_status)  
         
-        db.session.commit()
-        flash("Item updated successfully.", "success")
-        return redirect(url_for("admin_dashboard"))
+        db.session.commit()   
+        flash("Item updated successfully.", "success") 
+        return redirect(url_for("admin_dashboard"))  
     
     # For GET requests, pass the valid statuses to the template
-    valid_statuses = [status.value for status in Item]
+    valid_statuses = [status.value for status in ItemStatus] 
     return render_template("edit_item.html", item=item_to_edit, valid_statuses=valid_statuses)
 
 
@@ -257,10 +263,10 @@ def export_items_pdf():
         return redirect(url_for("admin_login"))
     
     # Fetch all items from the database
-    items = Item.query.all()
+    items = Item.query.all()   
     
     # Prepare inventory data similar to admin_dashboard
-    inventory_data = {}
+    inventory_data = {} 
     for item in items:
         if item.item_name not in inventory_data:
             inventory_data[item.item_name] = {
@@ -345,7 +351,7 @@ def export_items_pdf():
             item_data["not_working"],
             item_data["not_setup"],
             item_data["brands"],
-            item_data["colors"]
+            item_data["colors"]  
         ])
     
     # Get styles and create custom styles

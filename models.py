@@ -24,7 +24,6 @@ class ItemStatus(enum.Enum):
     Enumerates the possible statuses of an item.
     """
     WORKING = 'WORKING'
-    Working = 'Working'
     DAMAGED = 'DAMAGED'
     NOT_WORKING = 'NOT_WORKING'
     NOT_SETUP = 'NOT_SETUP'

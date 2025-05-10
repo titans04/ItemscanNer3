@@ -146,6 +146,10 @@
             background-color: #fef2f2;
             color: #991b1b;
         }
+        .badge-orange {
+            background-color: orange;
+            color: #fbe6e5;
+        }
         .text-muted {
             color: #9ca3af;
         }
@@ -340,6 +344,21 @@
                 display: none;
             }
         }
+
+        /* Search and Filter Styles */
+        .search-filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            justify-content: flex-start;
+        }
+        .search-filter-container .form-control {
+            max-width: 300px;
+        }
+        .search-filter-container .btn {
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -424,16 +443,20 @@
             <div id="item-list" class="section" style="display: none;">
                 <div class="table-wrapper">
                     <h3>Item List</h3>
+                    <div class="search-filter-container">
+                        <input type="text" id="search-input" class="form-control" placeholder="Search by Name, Brand, Color">
+                        <button id="clear-search-button" class="btn btn-outline-secondary">Clear Search</button>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="item-list-table">
                             <thead class="table-light">
                                 <tr>
                                     <th>Item barcode</th>
                                     <th>Item Name</th>
                                     <th>Lab Name</th>
                                     <th>Status</th>
-                                    <th>item brand</th>
-                                    <th>item colour</th>
+                                    <th>Item brand</th>
+                                    <th>Item colour</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -450,7 +473,7 @@
                                         {% elif item.status.value.upper() == 'NOT_WORKING' %}
                                             <span class="badge badge-danger">Not Working</span>
                                         {% elif item.status.value.upper() == 'NOT_SETUP' %}
-                                            <span class="badge badge-info">Not Setup</span>
+                                            <span class="badge badge-warning text-dark">Not Setup</span>
                                         {% else %}
                                             <span class="badge text-muted">{{ item.status.value.capitalize() }}</span>
                                         {% endif %}
@@ -472,8 +495,8 @@
                         <table class="table">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Item Name</th>
                                     <th>Item barcode</th>
+                                    <th>Item Name</th>
                                     <th>Lab Name</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -482,8 +505,8 @@
                             <tbody>
                                 {% for item in items %}
                                 <tr>
-                                    <td>{{ item.item_name }}</td>
                                     <td>{{ item.item_id }}</td>
+                                    <td>{{ item.item_name }}</td>
                                     <td>{{ item.location }}</td>
                                     <td>
                                         {% if item.status.value.upper() == 'WORKING' %}
@@ -491,9 +514,9 @@
                                         {% elif item.status.value.upper() == 'DAMAGED' %}
                                             <span class="badge badge-danger">Damaged</span>
                                         {% elif item.status.value.upper() == 'NOT_WORKING' %}
-                                            <span class="badge badge-warning text-dark">Not Working</span>
+                                            <span class="badge badge-danger">Not Working</span>
                                         {% elif item.status.value.upper() == 'NOT_SETUP' %}
-                                            <span class="badge badge-info">Not Setup</span>
+                                            <span class="badge badge-warning text-dark">Not Setup</span>
                                         {% else %}
                                             <span class="badge text-muted">{{ item.status.value.capitalize() }}</span>
                                         {% endif %}
@@ -521,10 +544,32 @@
         const sections = document.querySelectorAll('.section');
         const pageTitle = document.getElementById('page-title');
 
+        // Item List Search
+        const searchInput = document.getElementById('search-input');
+        const clearSearchButton = document.getElementById('clear-search-button');
+        const itemListTable = document.getElementById('item-list-table').getElementsByTagName('tbody')[0];
+        const itemListItems = itemListTable.getElementsByTagName('tr');
+
+        let isSidebarCollapsed = false;
+
         menuToggle.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
             mainContent.classList.toggle('expanded');
+            isSidebarCollapsed = !isSidebarCollapsed;
+
+            if (isSidebarCollapsed) {
+                sessionStorage.setItem('sidebarCollapsed', 'true');
+            } else {
+                sessionStorage.setItem('sidebarCollapsed', 'false');
+            }
         });
+
+        if (sessionStorage.getItem('sidebarCollapsed') === 'true') {
+            sidebar.classList.add('collapsed');
+            mainContent.classList.toggle('expanded');
+            isSidebarCollapsed = true;
+        }
+
 
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -554,6 +599,34 @@
         // Initially show the inventory overview
         document.getElementById('inventory-overview').style.display = 'block';
         pageTitle.textContent = 'Lab Items – Inventory Overview';
+
+        // Item List Search Functionality
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            for (let i = 0; i < itemListItems.length; i++) {
+                const rowData = itemListItems[i].getElementsByTagName('td');
+                let found = false;
+                for (let j = 0; j < rowData.length; j++) {
+                    if (rowData[j].textContent.toLowerCase().includes(searchTerm)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) {
+                    itemListItems[i].style.display = '';
+                } else {
+                    itemListItems[i].style.display = 'none';
+                }
+            }
+        });
+
+        clearSearchButton.addEventListener('click', () => {
+            searchInput.value = '';
+            for (let i = 0; i < itemListItems.length; i++) {
+                itemListItems[i].style.display = '';
+            }
+        });
     </script>
 </body>
 </html>
