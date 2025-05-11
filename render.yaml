@@ -1,0 +1,9 @@
+# filepath: c:\Users\Anotida\Documents\GitHub\ItemscanNer3\render.yaml
+services:
+  - type: web
+    name: itemscan-ner3
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    plan: free
+    region: oregon
