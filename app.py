@@ -394,13 +394,13 @@ def export_items_pdf():
     # Create the table with specified column widths
     table = Table(data, colWidths=col_widths, repeatRows=1)
     
-    # Apply professional black and white styling
+    # Apply professional black and white styling 
     table.setStyle(TableStyle([
         # Header row styling
-        ('BACKGROUND', (0, 0), (-1, 0), colors.white),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
         ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
-        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'), 
         ('FONTSIZE', (0, 0), (-1, 0), 10),
         ('BOTTOMPADDING', (0, 0), (-1, 0), 10),
         ('TOPPADDING', (0, 0), (-1, 0), 10),
@@ -421,7 +421,7 @@ def export_items_pdf():
         ('GRID', (0, 0), (-1, -1), 0.5, colors.black),    # Grid for all cells
         
         # Alternating row colors for better readability
-        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.lightgrey])
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.white])
     ]))
      
     # Add a footer with page numbers
