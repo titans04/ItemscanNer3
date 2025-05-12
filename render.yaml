@@ -1,9 +1,10 @@
-# filepath: c:\Users\Anotida\Documents\GitHub\ItemscanNer3\render.yaml
 services:
   - type: web
-    name: itemscan-ner3
+    name: flask-app
     env: python
-    buildCommand: ""
-    startCommand: gunicorn app:app
+    region: oregon  # or frankfurt (choose closest to your users)
     plan: free
-    region: oregon
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    autoDeploy: true
+    branch: main
