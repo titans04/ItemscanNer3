@@ -52,7 +52,7 @@ def admin_login():
             return redirect(url_for('admin_dashboard'))
         else:
             flash('Invalid credentials', 'danger')
-    return render_template('admin_login.html')
+    return render_template('index.html')  # Updated to render index.html
 
 # the admin dashboard
 @app.route("/admin_dashboard")
