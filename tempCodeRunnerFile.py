@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request, render_template, redirect, flash
 from datetime import datetime, timedelta
-from models import db, User, Item, BorrowLog
+from app.models import db, User, Item, BorrowLog
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'

@@ -1,0 +1,17 @@
+version: 1
+services:
+  web:
+    type: web
+    name: ItemscanNer3
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: flask run --host=0.0.0.0 --port=10000
+    envVars:
+      - key: FLASK_APP
+        value: app.index
+    routes:
+      - type: root
+        name: default
+        path: /
+        preservePath: true
