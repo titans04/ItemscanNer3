@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, flash, session, url_for, send_file
-from app.models import db, Item as ItemModel, ItemStatus  # Import only the necessary models
-from app.models import db, Item 
+from models import db, Item as ItemModel, ItemStatus  # Import only the necessary models
+#from app.models import db, Item 
 import io
 from reportlab.lib.pagesizes import letter, landscape
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
