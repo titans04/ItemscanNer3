@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Enum
+from datetime import datetime
 import enum
 
 db = SQLAlchemy()
@@ -35,11 +36,13 @@ class Item(db.Model):
     """
     __tablename__ = 'item'
     item_id = db.Column(db.String, primary_key=True)
+    asset_number = db.Column(db.String, nullable=True)
     item_name = db.Column(db.String, nullable=False)
     location = db.Column(db.String, nullable=False)
     status = db.Column(Enum(ItemStatus), default=ItemStatus.WORKING, nullable=False)
     brand = db.Column(db.String)
     color = db.Column(db.String)
+    captured_date = db.Column(db.DateTime, nullable=True) 
     
     def __repr__(self):
         return f'<Item(item_id={self.item_id}, item_name={self.item_name}, status={self.status})>'

@@ -16,217 +16,36 @@
             --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --transition: all 0.3s ease;
         }
-
-        body {
-            background-color: var(--light-bg);
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            color: #334155;
-            line-height: 1.5;
-            height: 100%;
-            margin: 0;
-            overflow: hidden;
-        }
-
-        .page-container {
-            width: 100%;
-            padding: 1rem;
-            margin: 0;
-        }
-
-        .content-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 2rem;
-            margin-bottom: 1rem;
-            height: calc(100vh - 2rem);
-            overflow-y: auto;
-        }
-
-        .page-header {
-            border-bottom: 1px solid #e2e8f0;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .page-header h2 {
-            margin: 0;
-            font-weight: 600;
-            color: #1e293b;
-            font-size: 1.5rem;
-        }
-
-        .page-header i {
-            margin-right: 0.75rem;
-            color: var(--primary-color);
-            font-size: 1.75rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: #475569;
-        }
-
-        .form-control, .form-select {
-            border-radius: var(--border-radius);
-            border: 1px solid #cbd5e1;
-            padding: 0.625rem 1rem;
-            transition: var(--transition);
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
-        }
-
-        .scanner-container {
-            margin: 1rem auto;
-            max-width: 300px;
-            border: 2px solid var(--primary-color);
-            border-radius: var(--border-radius);
-            padding: 1.25rem;
-            text-align: center;
-            background-color: #eff6ff;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .scanner-container:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
-            animation: scanning 2s infinite;
-        }
-
-        @keyframes scanning {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .scanner-container p {
-            font-size: 1rem;
-            color: #1e40af;
-            margin-bottom: 0;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .scanner-container p i {
-            margin-right: 0.5rem;
-            font-size: 1.25rem;
-        }
-
-        .scanner-container:hover {
-            transform: translateY(-3px);
-        }
-
-        .btn {
-            border-radius: var(--border-radius);
-            padding: 0.625rem 1.25rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-
-        .btn-primary:hover, .btn-primary:focus {
-            background-color: var(--primary-hover);
-            border-color: var(--primary-hover);
-        }
-
-        .btn-secondary {
-            background-color: #64748b;
-            border-color: #64748b;
-        }
-
-        .btn-secondary:hover, .btn-secondary:focus {
-            background-color: #475569;
-            border-color: #475569;
-        }
-
-        .alert {
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid transparent;
-        }
-
-        .alert-danger {
-            background-color: #fee2e2;
-            border-color: #fecaca;
-            color: #b91c1c;
-        }
-
-        .alert-success {
-            background-color: #dcfce7;
-            border-color: #bbf7d0;
-            color: #15803d;
-        }
-
-        .alert-warning {
-            background-color: #fff7ed;
-            border-color: #fed7aa;
-            color: #c2410c;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .form-section {
-            margin-bottom: 2rem;
-        }
-
-        .section-divider {
-            border-top: 1px solid #e2e8f0;
-            margin: 2rem 0;
-        }
-
-        .form-select option {
-            padding: 0.5rem;
-        }
-
-        /* Optional: Add icons to select dropdowns */
-        .select-icon-wrapper {
-            position: relative;
-        }
-
-        .select-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #64748b;
-        }
-
-        .select-with-icon {
-            padding-left: 2.75rem;
-        }
+        body { background-color: var(--light-bg); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #334155; height: 100%; margin: 0; overflow: hidden; }
+        .page-container { width: 100%; padding: 1rem; margin: 0; }
+        .content-card { background-color: var(--card-bg); border-radius: var(--border-radius); box-shadow: var(--box-shadow); padding: 2rem; margin-bottom: 1rem; height: calc(100vh - 2rem); overflow-y: auto; }
+        .page-header { border-bottom: 1px solid #e2e8f0; margin-bottom: 1.5rem; padding-bottom: 1rem; display: flex; align-items: center; }
+        .page-header h2 { margin: 0; font-weight: 600; color: #1e293b; font-size: 1.5rem; }
+        .page-header i { margin-right: 0.75rem; color: var(--primary-color); font-size: 1.75rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { font-weight: 500; margin-bottom: 0.5rem; color: #475569; }
+        .form-control, .form-select { border-radius: var(--border-radius); border: 1px solid #cbd5e1; padding: 0.625rem 1rem; transition: var(--transition); }
+        .form-control:focus, .form-select:focus { border-color: var(--primary-color); box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25); }
+        .scanner-container { margin: 1rem auto; max-width: 300px; border: 2px solid var(--primary-color); border-radius: var(--border-radius); padding: 1.25rem; text-align: center; background-color: #eff6ff; box-shadow: var(--box-shadow); transition: var(--transition); position: relative; overflow: hidden; cursor: pointer; }
+        .scanner-container:before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 4px; background: linear-gradient(to right, transparent, var(--primary-color), transparent); animation: scanning 2s infinite; }
+        @keyframes scanning { 0% { left: -100%; } 100% { left: 100%; } }
+        .scanner-container p { font-size: 1rem; color: #1e40af; margin-bottom: 0; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+        .scanner-container p i { margin-right: 0.5rem; font-size: 1.25rem; }
+        .scanner-container:hover { transform: translateY(-3px); }
+        .btn { border-radius: var(--border-radius); padding: 0.625rem 1.25rem; font-weight: 500; transition: var(--transition); }
+        .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
+        .btn-primary:hover, .btn-primary:focus { background-color: var(--primary-hover); border-color: var(--primary-hover); }
+        .btn-secondary { background-color: #64748b; border-color: #64748b; }
+        .btn-secondary:hover, .btn-secondary:focus { background-color: #475569; border-color: #475569; }
+        .alert { border-radius: var(--border-radius); padding: 1rem; margin-bottom: 1.5rem; border: 1px solid transparent; }
+        .form-actions { display: flex; gap: 1rem; margin-top: 2rem; }
+        .form-section { margin-bottom: 2rem; }
+        .section-divider { border-top: 1px solid #e2e8f0; margin: 2rem 0; }
     </style>
 </head>
 <body>
     <div class="page-container">
-        <div class="content-card" style="min-height: calc(100vh - 2rem);">
+        <div class="content-card">
             <div class="page-header">
                 <i class="bi bi-plus-circle"></i>
                 <h2>Add New Lab Item</h2>
@@ -235,7 +54,7 @@
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}" role="alert">
+                         <div class="alert alert-{{ category }}" role="alert">
                             <i class="bi {% if category == 'success' %}bi-check-circle{% elif category == 'danger' %}bi-exclamation-triangle{% elif category == 'warning' %}bi-exclamation-circle{% endif %} me-2"></i>
                             {{ message }}
                         </div>
@@ -246,10 +65,17 @@
             <form action="{{ url_for('add_item') }}" method="POST">
                 <div class="form-section">
                     <div class="form-group">
-                        <label for="item_id" class="form-label">Item Barcode</label>
+                        <label for="item_id" class="form-label">Item Barcode (Required)</label>
                         <input type="text" class="form-control" id="item_id" name="item_id" required autofocus placeholder="Scan or enter barcode">
                         <div class="scanner-container">
                             <p><i class="bi bi-upc-scan"></i> Place barcode in front of the scanner</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="asset_number" class="form-label">Asset Number (Optional)</label>
+                        <input type="text" class="form-control" id="asset_number" name="asset_number" placeholder="Scan or enter asset number">
+                        <div class="scanner-container">
+                            <p><i class="bi bi-hash"></i> Place asset tag in front of the scanner</p>
                         </div>
                     </div>
                 </div>
@@ -259,7 +85,7 @@
                 <div class="form-section">
                     <div class="form-group">
                         <label for="item_name" class="form-label">Item Name</label>
-                        <select class="form-select" id="item_name" name="item_name" required>
+                        <select class="form-select" id="item_name" name="item_name" required data-other-input="#item_name_other">
                             <option value="">-- Select Item --</option>
                             <option value="Monitor">Monitor</option>
                             <option value="Arduino Kit">Arduino Kit</option>
@@ -272,57 +98,102 @@
                             <option value="Elco-IOThub-E-Su">Elco-IOThub-E-Su</option>
                             <option value="White Board">White Board</option>
                             <option value="Tower">Tower</option>
-                            <option value="Other">Other</option>
+                            <option value="86 inch Monitor">86 inch Monitor</option>
+                            <option value="75 inch Monitor">75 inch Monitor</option>
+                            <option value="Workstation">Workstation</option>
+                            <option value="Webcam Screen">Webcam Screen</option>
+                            <option value="Headphone">Headphone</option>
+                            <option value="Router">Router</option>
+                            <option value="Humanoid">Humanoid</option>
+                            <option value="Mini Robot">Mini Robot</option>
+                            <option value="Robotic arm/hand">Robotic arm/hand</option>
+                            <option value="VR">VR</option>
+                            <option value="Xbox">Xbox</option>
+                            <option value="Docking station">Docking station</option>
+                            <option value="BOOK">BOOK</option>
+                            <option value="POWER Backup">POWER Backup</option>
+                            <option value="Aircon">Aircon</option>
+                            <option value="Chair">Chair</option>
+                            <option value="Desk">Desk</option>
+                            <option value="Table">Table</option>
+                            <option value="__other__">Other (Specify)</option>
                         </select>
+                        <input type="text" class="form-control mt-2" id="item_name_other" name="item_name_other" placeholder="Specify other item name" style="display: none;">
                     </div>
 
                     <div class="form-group">
                         <label for="location" class="form-label">Lab Name</label>
-                        <select class="form-select" id="location" name="location" required>
+                        <select class="form-select" id="location" name="location" required data-other-input="#location_other">
                             <option value="">-- Select Lab --</option>
                             <option value="NB IOT">NB IOT</option>
                             <option value="Additive manufacturing">Additive Manufacturing</option>
+                            <option value="4IR CoE">4IR CoE</option>
+                            <option value="FAI 24Hour">FAI 24Hour</option>
+                            <option value="SMART LAB">SMART LAB</option>
+                            <option value="ACE">ACE</option>
+                            <option value="IMMERSIVE">IMMERSIVE</option>
+                            <option value="DEAF Center">DEAF Center</option>
+                            <option value="WORKSHOP">WORKSHOP</option>
+                            <option value="FAI ASSET ROOM">FAI ASSET ROOM</option>
+                            <option value="FAI STORE ROOMS">FAI STORE ROOMS</option>
+                            <option value="__other__">Other (Specify)</option>
+                        </select>
+                        <input type="text" class="form-control mt-2" id="location_other" name="location_other" placeholder="Specify other lab name" style="display: none;">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="brand" class="form-label">Brand (Optional)</label>
+                                <select class="form-select" id="brand" name="brand" data-other-input="#brand_other">
+                                    <option value="">-- Not Specified --</option>
+                                    <option value="Hp">HP</option>
+                                    <option value="LG">LG</option>
+                                    <option value="Huawei">Huawei</option>
+                                    <option value="Seewo">Seewo</option>
+                                    <option value="Lenovo">Lenovo</option>
+                                    <option value="Dell">Dell</option>
+                                    <option value="Hikvision">Hikvision</option>
+                                    <option value="Sunsynk">Sunsynk</option>
+                                    <option value="Flexo">Flexo</option>
+                                    <option value="__other__">Other (Specify)</option>
+                                </select>
+                                <input type="text" class="form-control mt-2" id="brand_other" name="brand_other" placeholder="Specify other brand" style="display: none;">
+                            </div>
+                        </div>
+                           
+                           <div class="col-md-6">
+    <div class="form-group">
+        <label for="color" class="form-label">Color (Optional)</label>
+        <div class="select-icon-wrapper">
+            <select class="form-select" id="color" name="color">
+                <option value="">-- Select Color --</option>
+                <option value="Black">Black</option>
+                <option value="White">White</option>
+                <option value="Silver">Silver</option>
+                <option value="Blue">Blue</option>
+                <option value="Yellow">Yellow</option>
+                <option value="Gray">Gray</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <input type="text" class="form-control mt-2" id="color_other" name="color_other" placeholder="Specify other color" style="display: none;">
+    </div>
+</div>
+                    <div class="form-group">
+                        <label for="captured_date" class="form-label">Capture Date (Optional)</label>
+                        <input type="date" class="form-control" id="captured_date" name="captured_date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status" class="form-label">Item Status</label>
+                        <select class="form-select" id="status" name="status" required>
+                            <option value="">-- Select Status --</option>
+                            {% for status in valid_statuses %}
+                                <option value="{{ status }}" {% if status == 'WORKING' %}selected{% endif %}>{{ status|replace('_', ' ')|title }}</option>
+                            {% endfor %}
                         </select>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="brand" class="form-label">Brand (Optional)</label>
-                            <select class="form-select" id="brand" name="brand">
-                                <option value="">-- Select Brand --</option>
-                                <option value="Hp">HP</option>
-                                <option value="LG">LG</option>
-                                <option value="Huawei">Huawei</option>
-                                <option value="Seewo">Seewo</option>
-                                <option value="Lenovo">Lenovo</option>
-                                <option value="Others">Others</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="color" class="form-label">Color (Optional)</label>
-                            <select class="form-select" id="color" name="color">
-                                <option value="Black">Black</option>
-                                <option value="White">White</option>
-                                <option value="Yellow">Yellow</option>
-                                <option value="Blue">Blue</option>
-                                <option value="Others">Others</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="status" class="form-label">Item Status</label>
-                    <select class="form-select" id="status" name="status" required>
-                        <option value="">-- Select Status --</option>
-                        {% for status in valid_statuses %}
-                            <option value="{{ status }}">{{ status|replace('_', ' ')|title }}</option>
-                        {% endfor %}
-                    </select>
                 </div>
 
                 <div class="form-actions">
@@ -339,24 +210,38 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Focus on barcode input when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Focus the main barcode input on page load
             document.getElementById('item_id').focus();
-            
-            // Add animation to the scanner container
-            const scannerContainer = document.querySelector('.scanner-container');
-            scannerContainer.addEventListener('click', function() {
-                document.getElementById('item_id').focus();
+
+            // Makes scanner boxes focus their correct input field
+            document.querySelectorAll('.scanner-container').forEach(container => {
+                container.addEventListener('click', function() {
+                    const inputField = this.closest('.form-group').querySelector('input[type="text"]');
+                    if (inputField) inputField.focus();
+                });
             });
 
-            // Optional: Add validation feedback
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function(event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
+            // GENERIC FUNCTION FOR "OTHER" FIELDS
+            // Finds all select elements with a `data-other-input` attribute and handles them.
+            document.querySelectorAll('select[data-other-input]').forEach(selectElement => {
+                const otherInput = document.querySelector(selectElement.dataset.otherInput);
+
+                const toggleOtherInput = () => {
+                    if (selectElement.value === '__other__') {
+                        otherInput.style.display = 'block';
+                        if(selectElement.required) {
+                           otherInput.required = true;
+                        }
+                    } else {
+                        otherInput.style.display = 'none';
+                        otherInput.required = false;
+                        otherInput.value = '';
+                    }
+                };
+                
+                selectElement.addEventListener('change', toggleOtherInput);
+                toggleOtherInput(); // Run on page load
             });
         });
     </script>

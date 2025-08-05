@@ -104,58 +104,105 @@
                 <label for="item_id">Item ID</label>
                 <input type="text" class="form-control" id="item_id" value="{{ item.item_id }}" readonly>
             </div>
+
+            <!-- NEW: Asset Number field -->
+            <div class="form-group">
+                <label for="asset_number">Asset Number</label>
+                <input type="text" class="form-control" id="asset_number" name="asset_number"
+                       value="{{ item.asset_number or '' }}" placeholder="Scan or enter asset number">
+            </div>
+
             <div class="form-group">
                 <label for="item_name">Item Name</label>
                 <input type="text" class="form-control" id="item_name" name="item_name" value="{{ item.item_name }}" required>
             </div>
+
+            <!-- UPDATED: Location with "Other" support -->
             <div class="form-group">
                 <label for="location">Location</label>
                 <select class="form-select" id="location" name="location" required>
                     <option value="">-- Select Lab --</option>
                     <option value="NB IOT" {% if item.location == 'NB IOT' %}selected{% endif %}>NB IOT</option>
                     <option value="Additive manufacturing" {% if item.location == 'Additive manufacturing' %}selected{% endif %}>Additive manufacturing</option>
+                    <!-- you can add the rest of your locations here -->
+                    <option value="__other__" {% if item.location not in ['NB IOT', 'Additive manufacturing'] and item.location %}selected{% endif %}>Other (type new)</option>
                 </select>
+                <!-- NEW: other location input, shown only if needed -->
+                <input type="text" class="form-control mt-2" id="location_other" name="location_other"
+                       placeholder="Specify other lab name"
+                       {% if item.location not in ['NB IOT', 'Additive manufacturing'] and item.location %}value="{{ item.location }}"{% endif %}
+                       style="display: none;">
             </div>
 
             <div class="form-group">
                 <label for="brand" class="form-label">Brand (Optional)</label>
                 <select class="form-select" id="brand" name="brand">
                     <option value="">-- Select Brand --</option>
-                    <option value="Hp">HP</option>
-                    <option value="LG">LG</option>
-                    <option value="Huawei">Huawei</option>
-                    <option value="Seewo">Seewo</option>
-                    <option value="Lenovo">Lenovo</option>
-                    <option value="Others">Others</option>
+                    <option value="Hp" {% if item.brand == 'Hp' %}selected{% endif %}>HP</option>
+                    <option value="LG" {% if item.brand == 'LG' %}selected{% endif %}>LG</option>
+                    <option value="Huawei" {% if item.brand == 'Huawei' %}selected{% endif %}>Huawei</option>
+                    <option value="Seewo" {% if item.brand == 'Seewo' %}selected{% endif %}>Seewo</option>
+                    <option value="Lenovo" {% if item.brand == 'Lenovo' %}selected{% endif %}>Lenovo</option>
+                    <option value="Others" {% if item.brand == 'Others' %}selected{% endif %}>Others</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="color" class="form-label">Color (Optional)</label>
                 <select class="form-select" id="color" name="color">
-                    <option value="Black">Black</option>
-                    <option value="White">White</option>
-                    <option value="Yellow">Yellow</option>
-                    <option value="Blue">Blue</option>
-                    <option value="Others">Others</option>
+                    <option value="Black" {% if item.color == 'Black' %}selected{% endif %}>Black</option>
+                    <option value="White" {% if item.color == 'White' %}selected{% endif %}>White</option>
+                    <option value="Yellow" {% if item.color == 'Yellow' %}selected{% endif %}>Yellow</option>
+                    <option value="Blue" {% if item.color == 'Blue' %}selected{% endif %}>Blue</option>
+                    <option value="Others" {% if item.color == 'Others' %}selected{% endif %}>Others</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="status">Item Status</label>
                 <select class="form-select" id="status" name="status" required>
                     {% for status in valid_statuses %}
                         <option value="{{ status }}" {% if item.status.value == status %}selected{% endif %}>
-                            {{ status|title }}
+                            {{ status|replace('_', ' ')|title }}
                         </option>
                     {% endfor %}
                 </select>
             </div>
+
+            <!-- NEW: Captured Date -->
+            <div class="form-group">
+                <label for="captured_date">Captured Date</label>
+                <input type="datetime-local" class="form-control" id="captured_date" name="captured_date"
+                    value="{% if item.captured_date %}{{ item.captured_date.strftime('%Y-%m-%dT%H:%M') }}{% endif %}">
+            </div>
+
             <div class="mt-4">
                 <button type="submit" class="btn btn-primary">Update Item</button>
                 <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
             </div>
         </form>
     </div>
+
+    <script>
+        // Handle showing/hiding the "other" location input (UPDATED SECTION)
+        function toggleLocationInput() {
+            const select = document.getElementById('location');
+            const otherInput = document.getElementById('location_other');
+            if (select.value === '__other__') {
+                otherInput.style.display = 'block';
+                otherInput.required = true;
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.required = false;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const locationSelect = document.getElementById('location');
+            locationSelect.addEventListener('change', toggleLocationInput);
+            toggleLocationInput(); // initial state based on current selection
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
